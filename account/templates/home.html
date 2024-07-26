@@ -6,5 +6,9 @@
 <body>
     <h1 style="color: red"> Welcome </h1>
 
+    {% comment %} {% url %} template tag to generate the URL for the login page dynamically. {% endcomment %}
+    {% comment %} This tag takes the name of the URL pattern defined in urls.py as an argument. {% endcomment %}
+    <a href="{% url 'login' %}">Login</a>
+
 </body>
 </html>

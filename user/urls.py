@@ -20,5 +20,6 @@ from account import views as acc
 
 urlpatterns = [
     path('',acc.home, name="home"),
+    path("login/", acc.login, name="login"),
     path('admin/', admin.site.urls),
 ]
