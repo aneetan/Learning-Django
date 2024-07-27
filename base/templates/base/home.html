@@ -27,26 +27,38 @@
         {% block content %}
         
         <h1> Home Page  </h1> 
+        
 
         <div>
+           
                 <table>
                     <thead>
                         <tr>
+                            <th> User </th>
                             <th>ID</th>
                             <th>Name</th>
+                            <th> Topic </th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for i in r %}
+
                     
-                        <tr>
+                        <tr> 
+                            <td> <span> @{{i.host.username}} </span> </td>
+                    
+
                             <td> {{i.id}}</td>
                             {% comment %} <td> <a href="/room/{{i.id}}">  {{i.name }}  </a> </td> {% endcomment %}
 
                             {% comment %} Using url name for reference  {% endcomment %}
 
                             <td> <a href="{% url 'room' i.id%}"> {{i.name}} </a> </td>
+
+                            <td> <small> {{i.topic.name}} </small>
                         </tr>
+
+                        <hr>
                     
                     {% endfor %}
                     
