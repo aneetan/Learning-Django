@@ -26,7 +26,7 @@ class Room(models.Model):
     #When you implement the __str__ method in a class,
     # you're telling Python how to convert an instance of that class into a string
 
-    # - for inverse
+    # order the data (- for inverse) based on new create
     class Meta:
         ordering = ['-updated', '-created']
     #string representation of a room
