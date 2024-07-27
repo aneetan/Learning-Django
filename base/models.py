@@ -26,10 +26,16 @@ class Room(models.Model):
     #When you implement the __str__ method in a class,
     # you're telling Python how to convert an instance of that class into a string
 
+    # - for inverse
+    class Meta:
+        ordering = ['-updated', '-created']
     #string representation of a room
-    def __str__(self):
+    def __str__(self): 
         #must be a string
         return self.name
+    
+
+
     
 
 class Message(models.Model):
