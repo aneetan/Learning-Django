@@ -41,7 +41,11 @@
                     
                         <tr>
                             <td> {{i.id}}</td>
-                            <td> {{i.name }} </td>
+                            {% comment %} <td> <a href="/room/{{i.id}}">  {{i.name }}  </a> </td> {% endcomment %}
+
+                            {% comment %} Using url name for reference  {% endcomment %}
+
+                            <td> <a href="{% url 'room' i.id%}"> {{i.name}} </a> </td>
                         </tr>
                     
                     {% endfor %}
