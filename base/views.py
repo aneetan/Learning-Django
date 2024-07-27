@@ -22,3 +22,21 @@ def addRoom(request):
             return redirect('home')
 
     return render(request, 'base/room_form.html', {'form': form})
+
+def editRoom(request, key):
+    room = Room.objects.get(id = key)
+    #the form will be filled with instance of room
+    form = RoomForm(instance=room) 
+
+    if request.method == 'POST':
+        form = RoomForm(request.POST, instance=room)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context = {'form' : form}
+    return render(request, 'base/room_form.html', context)
+
+
+

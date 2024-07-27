@@ -43,6 +43,7 @@
                     <tbody>
                     {% for i in r %}
 
+
                     
                         <tr> 
                             <td> <span> @{{i.host.username}} </span> </td>
@@ -56,6 +57,9 @@
                             <td> <a href="{% url 'room' i.id%}"> {{i.name}} </a> </td>
 
                             <td> <small> {{i.topic.name}} </small>
+
+                            <td> <a href="{% url 'editRoom' i.id %}"> Edit room </a> </td>
+                            
                         </tr>
 
                         <hr>
@@ -64,10 +68,12 @@
                     
                     </tbody>
                 </table>
+                <a href="{% url 'addRoom' %}"> Add room </a> <br>
             
         </div>
 
-        <a href="{% url 'addRoom' %}"> Add room </a>
+        
+
     
         {% endblock content %}
 
