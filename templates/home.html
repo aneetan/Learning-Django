@@ -11,9 +11,14 @@
     </head>
     <body>
 
-        {% include "navbar.html" %}
+        {% extends "main.html" %}
         
-        <h1> Home Page  </h1>
+        {% block content %}
+        
+        <h1> Home Page  </h1> 
+    
+        {% endblock content %}
+
         
         <script src="" async defer></script>
     </body>
