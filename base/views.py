@@ -10,7 +10,7 @@ def home(request):
     if request.GET.get('q') != None:
         q= request.GET.get('q')
         #icontains is case insensitive
-        rooms = Room.objects.filter(topic__name__icontains= q)
+        rooms = Room.objects.filter(topic__name__icontains= q, name__)
     
     else:
         rooms = Room.objects.all()
