@@ -5,7 +5,13 @@ from .forms import RoomForm
 
 def home(request):
     rooms = Room.objects.all()
-    return render(request, 'base/home.html', {'r': rooms})
+
+    #search functionality
+    topic = Topic.objects.all()
+
+    context = {'r':rooms, 'topics': topic}
+
+    return render(request, 'base/home.html', context)
 
 def room(request, pk):  
     room = Room.objects.get(id=pk)
