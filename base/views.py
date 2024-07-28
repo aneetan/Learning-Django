@@ -4,7 +4,16 @@ from .forms import RoomForm
 
 
 def home(request):
-    rooms = Room.objects.all()
+    #q is parameter from the url 
+    # q = request.GET.get('q') if request.GET.get('q') != None else ''
+
+    if request.GET.get('q') != None:
+        q= request.GET.get('q')
+        #icontains is case insensitive
+        rooms = Room.objects.filter(topic__name__icontains= q)
+    
+    else:
+        rooms = Room.objects.all()
 
     #search functionality
     topic = Topic.objects.all()

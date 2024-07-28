@@ -39,6 +39,14 @@
                 <h3> Browse Topics </h3>
                 <hr>
 
+                <div>
+                    <a style="font-weight: 600" href="{% url 'home' %}"> See All </a>
+                </div>
+
+                <hr>
+
+               
+
                 {% for topic in topics %}
                     <div>
                         <a style="text-decoration: none; color: green; font-weight: 600" href="{% url 'home' %}?q={{topic.name}}"> {{topic.name}} </a>
