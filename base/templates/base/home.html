@@ -18,6 +18,12 @@
             th {
                 background-color: #f2f2f2;
             }
+
+            .home-container{
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+
+            }
         </style>
     </head>
     <body>
@@ -27,53 +33,94 @@
         {% block content %}
         
         <h1> Home Page  </h1> 
-        
 
-        <div>
-           
-                <table>
-                    <thead>
-                        <tr>
-                            <th> User </th>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th> Topic </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <div class ="home-container">
+            <div>
+                <h3> Browse Topics </h3>
+                <hr>
+
+            </div>
+
+            <div>
+
+                <div>
+
+                    <a style="color:red; font-size:24px" href="{% url 'addRoom' %}"> Add room </a> <br>
+                    <hr>
+
                     {% for i in r %}
 
+                    <div> 
+                        <span>Host Name: {{i.host.username}} </span>
 
-                    
-                        <tr> 
-                            <td> <span> @{{i.host.username}} </span> </td>
-                    
+                        <h4> Id: @{{i.id}} </h4>
 
-                            <td> {{i.id}}</td>
-                            {% comment %} <td> <a href="/room/{{i.id}}">  {{i.name }}  </a> </td> {% endcomment %}
+                        <p> <a href="{% url 'room' i.id%}"> Room Name: {{i.name}} </a> </p>
 
-                            {% comment %} Using url name for reference  {% endcomment %}
+                        <small>Topic: {{i.topic.name}} </small> <br>
 
-                            <td> <a href="{% url 'room' i.id%}"> {{i.name}} </a> </td>
+                        <a href="{% url 'editRoom' i.id %}"> Edit room </a> <br>
+                        
+                        <a href="{% url 'deleteRoom' i.id %}"> Delete room </a>
 
-                            <td> <small> {{i.topic.name}} </small>
 
-                            <td> <a href="{% url 'editRoom' i.id %}"> Edit room </a> </td>
-                                
-                            <td> <a href="{% url 'deleteRoom' i.id %}"> Delete room </a> </td>
+                        
+                    </div>
 
-                            
-                        </tr>
+                    <hr>
 
-                        <hr>
-                    
                     {% endfor %}
-                    
-                    </tbody>
-                </table>
-                <a href="{% url 'addRoom' %}"> Add room </a> <br>
+
             
+                    {% comment %} <table>
+                        <thead>
+                            <tr>
+                                <th> User </th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th> Topic </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in r %}
+
+
+                        
+                            <tr> 
+                                <td> <span> @{{i.host.username}} </span> </td>
+                        
+
+                                <td> {{i.id}}</td>
+                                {% comment %} <td> <a href="/room/{{i.id}}">  {{i.name }}  </a> </td> {% endcomment %}
+
+                                {% comment %} Using url name for reference  {% endcomment %}
+
+                                {% comment %} <td> <a href="{% url 'room' i.id%}"> {{i.name}} </a> </td>
+
+                                <td> <small> {{i.topic.name}} </small>
+
+                                <td> <a href="{% url 'editRoom' i.id %}"> Edit room </a> </td>
+                                    
+                                <td> <a href="{% url 'deleteRoom' i.id %}"> Delete room </a> </td> {% endcomment %}
+
+                                
+                            {% comment %} </tr>
+
+                            <hr>
+                        
+                        {% endfor %}
+                        
+                        </tbody>
+                    </table>  {% endcomment %}
+                
+                </div>
+
+            </div>
+        
         </div>
+        
+
+       
 
         
 

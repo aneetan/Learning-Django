@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Room
+from .models import Room, Topic
 from .forms import RoomForm
 
 
