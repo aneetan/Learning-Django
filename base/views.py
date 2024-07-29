@@ -3,6 +3,10 @@ from django.db.models import Q
 from .models import Room, Topic
 from .forms import RoomForm
 
+def loginPage(request):
+    context = {} 
+    return render(request, 'base/login_register.html', context)
+
 
 def home(request):
     #q is parameter from the url 
