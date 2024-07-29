@@ -98,3 +98,8 @@ def deleteRoom(request, key):
         return redirect('home')
 
     return render(request, 'base/delete.html', {'obj':room})
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
