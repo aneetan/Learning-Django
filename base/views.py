@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 from .models import Room, Topic
 from .forms import RoomForm
 
@@ -62,6 +63,7 @@ def room(request, pk):
     room = Room.objects.get(id=pk)
     return render(request, 'room.html', {'room': room})
 
+@login_required(login_url='login')
 def addRoom(request):
     form = RoomForm()
     if request.method == 'POST':
@@ -74,6 +76,7 @@ def addRoom(request):
 
     return render(request, 'base/room_form.html', {'form': form})
 
+@login_required(login_url='login')
 def editRoom(request, key):
     room = Room.objects.get(id = key)
     #the form will be filled with instance of room
@@ -90,6 +93,7 @@ def editRoom(request, key):
     return render(request, 'base/room_form.html', context)
 
 
+@login_required(login_url='login')
 def deleteRoom(request, key):
     room = Room.objects.get(id=key)
 
