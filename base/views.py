@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpRequest
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -82,6 +83,10 @@ def editRoom(request, key):
     #the form will be filled with instance of room
     form = RoomForm(instance=room) 
 
+    #to edit only the room of logged user
+    if request.user != room.host:
+        return HttpResponse('Permission denied')
+
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=room)
         
@@ -96,6 +101,9 @@ def editRoom(request, key):
 @login_required(login_url='login')
 def deleteRoom(request, key):
     room = Room.objects.get(id=key)
+
+    if request.user != room.host:
+        return HttpResponse('Permission denied')
 
     if request.method == 'POST':
         room.delete()

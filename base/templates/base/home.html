@@ -76,10 +76,13 @@
 
                         <small>Topic: {{i.topic.name}} </small> <br>
 
+                        {% if request.user == i.host %}
+
                         <a href="{% url 'editRoom' i.id %}"> Edit room </a> <br>
                         
                         <a href="{% url 'deleteRoom' i.id %}"> Delete room </a>
 
+                        {% endif %}
 
                         
                     </div>
