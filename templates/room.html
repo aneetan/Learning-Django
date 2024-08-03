@@ -12,10 +12,28 @@
     <body>
  
         {% extends "main.html" %}
-        
+         
         {% block content %}
         
         <h1> {{room.name}}  </h1> 
+
+        <p> {{room.description}} </p>
+
+        <div class="comment-wrapper">
+            <h3> Conversation </h3>
+            <hr> 
+
+            {% for msg in msg%}
+            <div>
+                <small> @{{msg.user}} {{msg.created|timesince}} ago </small>
+
+                <p style="color: green"> {{msg.body}} </p>
+                <hr>
+
+
+            </div>
+            {% endfor %}
+        </div>
     
         {% endblock content %}
         

@@ -92,7 +92,11 @@ def home(request):
 
 def room(request, pk):  
     room = Room.objects.get(id=pk)
-    return render(request, 'room.html', {'room': room})
+
+    #give us set of messages that are related to this room
+    message = room.message_set.all().order_by('-created')
+    context = {'room': room, 'msg': message}
+    return render(request, 'room.html', context )
 
 @login_required(login_url='login')
 def addRoom(request):
