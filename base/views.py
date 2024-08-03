@@ -96,17 +96,19 @@ def room(request, pk):
     #give us set of messages that are related to this room
     message = room.message_set.all().order_by('-created')
 
+    participants = room.participants.all()
+
     if request.method == 'POST':
         message = Message.objects.create(
             user = request.user,
             room = room,
             body = request.POST.get('body')
         )
+
+        room.participants.add(request.user)
         return redirect('room', pk=room.id)
-    
 
-
-    context = {'room': room, 'msg': message}
+    context = {'room': room, 'msg': message, 'participants': participants}
     return render(request, 'room.html', context )
 
 @login_required(login_url='login')
