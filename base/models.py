@@ -13,7 +13,7 @@ class Room(models.Model):
     name = models.CharField(max_length=100)
     #the form and database for this field can have null values  
     description = models.TextField(null=True, blank=True)
-    #participant
+    participants = models.ManyToManyField(User, related_name='participants', blank= True)  #related name as the user is used already
     # Auto generate the date field 
     updated = models.DateTimeField(auto_now=True)  
 
