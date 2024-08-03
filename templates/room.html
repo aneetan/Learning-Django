@@ -37,9 +37,19 @@
 
                     {% for msg in msg%}
                     <div>
+
+
                         <small> @{{msg.user}} {{msg.created|timesince}} ago </small>
 
+
                         <p style="color: green"> {{msg.body}} </p>
+
+                        {% if request.user == msg.user %}
+
+                        <a href="{% url 'deleteMessage' msg.id %}"> Delete </a>
+
+                        {% endif %}
+
                         <hr>
 
 
