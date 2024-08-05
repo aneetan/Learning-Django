@@ -68,23 +68,19 @@ def registerUser(request):
 def home(request):
     #q is parameter from the url 
     # q = request.GET.get('q') if request.GET.get('q') != None else ''
+    q= request.GET.get('q') if request.GET.get('q') != None else ''
 
-    if request.GET.get('q') != None:
-        q= request.GET.get('q')
-        #icontains is case insensitive
-        rooms = Room.objects.filter(
-            Q(topic__name__icontains= q) |
-            Q(name__icontains= q) |
-            Q(description__icontains = q)
-            )
-    
-    else:
-        rooms = Room.objects.all()
+    #icontains is case insensitive
+    rooms = Room.objects.filter(
+        Q(topic__name__icontains= q) |
+        Q(name__icontains= q) |
+        Q(description__icontains = q)
+    )
 
     #search functionality
     topic = Topic.objects.all()
     room_count = rooms.count()
-    message = Message.objects.all()
+    message = Message.objects.filter(Q(room__topic__name__icontains = q))
 
 
     context = {'r': rooms, 'topics': topic, 'room_count': room_count, 'msg': message}
