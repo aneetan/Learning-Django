@@ -21,7 +21,7 @@
 
             .home-container{
                 display: grid;
-                grid-template-columns: 1fr 3fr;
+                grid-template-columns: 1fr 3fr 1fr;
 
             }
         </style>
@@ -135,6 +135,22 @@
                 
                 </div>
 
+            </div>
+
+            <div>
+                <h3> Recent Activities </h3>
+                <hr>
+                {% for msg in msg %}
+                    <div style="border: 1px solid">
+                        <small> <b> @{{msg.user}}  {{msg.created|timesince}} </b> </small> <br>
+
+                        <small > <i> Replied to "{{msg.room}}" </i> </small>
+
+                        <p> {{msg}} </p>
+
+                    </div>
+
+                {% endfor %}
             </div>
         
         </div>

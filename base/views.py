@@ -83,10 +83,11 @@ def home(request):
 
     #search functionality
     topic = Topic.objects.all()
-
     room_count = rooms.count()
+    message = Message.objects.all()
 
-    context = {'r':rooms, 'topics': topic, 'room_count': room_count}
+
+    context = {'r': rooms, 'topics': topic, 'room_count': room_count, 'msg': message}
 
     return render(request, 'base/home.html', context)
 

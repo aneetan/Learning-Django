@@ -46,8 +46,13 @@ class Message(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-updated', '-created']
+
     def __str__(self):
         #to return the first 50 characters
         return self.body[0:50]
+    
+
     
 
