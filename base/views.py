@@ -154,13 +154,28 @@ def editRoom(request, key):
         return HttpResponse('Permission denied')
 
     if request.method == 'POST':
-        form = RoomForm(request.POST, instance=room)
-        
-        if form.is_valid():
-            form.save()
-            return redirect('home') 
+        # form = RoomForm(request.POST, instance=room)
+        # if form.is_valid():
+        #     form.save()
+        #     return redirect('home')
 
-    context = {'form' : form, 'topics':topics}
+
+        topic_name = request.POST.get('topic')
+        #get the value if its already there and create a new topic if its not there
+        topic, create = Topic.objects.get_or_create(name=topic_name)
+
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
+
+
+
+        return redirect('home')
+        
+         
+
+    context = {'form' : form, 'topics':topics, 'room': room}
     return render(request, 'base/room_form.html', context)
 
 
