@@ -111,26 +111,43 @@ def room(request, pk):
 @login_required(login_url='login')
 def addRoom(request):
     form = RoomForm()
+    topics =Topic.objects.all()
+
     if request.method == 'POST':
+        topic_name = request.POST.get('topic')
+        #get the value if its already there and create a new topic if its not there
+        topic, create = Topic.objects.get_or_create(name=topic_name)
+
+        Room.objects.create(
+            host = request.user,
+            topic = topic,
+            name = request.POST.get('name'),
+            description = request.POST.get('description')
+
+        )
+
         # print(request.POST)
-        form = RoomForm(request.POST)
+        #form = RoomForm(request.POST)
 
-        if form.is_valid():
-            # get instance of the room
-            room = form.save(commit=False)
+        # if form.is_valid():
+        #     # get instance of the room
+        #     room = form.save(commit=False)
 
-            room.host = request.user
-            room.save()
+        #     room.host = request.user
+        #     room.save()
             
-            return redirect('home')
+        return redirect('home')
 
-    return render(request, 'base/room_form.html', {'form': form})
+    return render(request, 'base/room_form.html', {'form': form, 'topics':topics})
 
 @login_required(login_url='login')
 def editRoom(request, key):
     room = Room.objects.get(id = key)
     #the form will be filled with instance of room
     form = RoomForm(instance=room) 
+
+    topics =Topic.objects.all()
+
 
     #to edit only the room of logged user
     if request.user != room.host:
@@ -141,9 +158,9 @@ def editRoom(request, key):
         
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('home') 
 
-    context = {'form' : form}
+    context = {'form' : form, 'topics':topics}
     return render(request, 'base/room_form.html', context)
 
 
