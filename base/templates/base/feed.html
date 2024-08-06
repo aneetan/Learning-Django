@@ -1,7 +1,7 @@
 {% for i in r %}
 
 <div> 
-    <span>Host Name: {{i.host.username}} </span>
+    <a href="{% url 'userProfile' i.host.id %}">Host Name: {{i.host.username}} </span> </a>
 
     <h4> Id: @{{i.id}} </h4>
 

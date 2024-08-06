@@ -170,6 +170,12 @@ def deleteMessage(request, key):
     return render(request, 'base/delete.html', {'obj':message})
 
 
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    context = {'user':user}
+    return render(request, 'base/profile.html', context)
+
+
 def logoutUser(request):
     logout(request)
     return redirect('home')
