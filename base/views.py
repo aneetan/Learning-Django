@@ -116,7 +116,12 @@ def addRoom(request):
         form = RoomForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            # get instance of the room
+            room = form.save(commit=False)
+
+            room.host = request.user
+            room.save()
+            
             return redirect('home')
 
     return render(request, 'base/room_form.html', {'form': form})
