@@ -172,7 +172,10 @@ def deleteMessage(request, key):
 
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
-    context = {'user':user}
+    rooms = user.room_set.all()
+    message = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {'user':user, 'r': rooms, 'msg': message, 'topics':topics}
     return render(request, 'base/profile.html', context)
 
 
