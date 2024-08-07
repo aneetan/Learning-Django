@@ -18,4 +18,6 @@ class RoomForm(ModelForm):
 class EditUserForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ['username', 'password', 'email']
+        fields = ['username', 'email']
+
+        exclude = ['password']

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from .models import Room, Topic,Message
-from .forms import RoomForm
+from .forms import RoomForm, EditUserForm
 
 
 def loginPage(request):
@@ -218,7 +218,23 @@ def userProfile(request, pk):
 
 @login_required(login_url='login')
 def updateUser(request):
-    return render(request, 'base/editUser.html')
+    user = request.user
+    form = EditUserForm(instance = user)
+
+    if request.method == 'POST':
+        form = EditUserForm(request.POST, instance=user)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+
+            # Clean data
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('home')
+        
+    return render(request, 'base/editUser.html', {'form': form})
 
 
 def logoutUser(request):

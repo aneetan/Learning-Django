@@ -28,6 +28,10 @@
             </div>
 
             <div>
+                {% if request.user == user%}
+                <a href="{% url 'updateUser' %}"> Edit Profile </a>
+        
+                {% endif %}
 
                 <div>
                     <h5> {{room_count}} rooms available </h5>
