@@ -216,6 +216,11 @@ def userProfile(request, pk):
     return render(request, 'base/profile.html', context)
 
 
+@login_required(login_url='login')
+def updateUser(request):
+    return render(request, 'base/editUser.html')
+
+
 def logoutUser(request):
     logout(request)
     return redirect('home')

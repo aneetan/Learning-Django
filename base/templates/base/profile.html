@@ -18,6 +18,11 @@
 
     <div>
         <h1 style="color:red"> Name: {{user.username}} </h1>
+
+        {% if request.user == user%}
+        <a href="{% url 'updateUser' %}"> Edit Profile </a>
+
+        {% endif %}
  
         {% include "base/feed.html" %}
     </div>
