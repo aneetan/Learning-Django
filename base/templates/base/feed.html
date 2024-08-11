@@ -1,0 +1,25 @@
+{% for i in r %}
+
+<div> 
+    <a href="{% url 'userProfile' i.host.id %}">Host Name: {{i.host.username}} </span> </a>
+
+    <h4> Id: @{{i.id}} </h4>
+
+    <p> <a href="{% url 'room' i.id%}"> Room Name: {{i.name}} </a> </p>
+
+    <small>Topic: {{i.topic.name}} </small> <br>
+
+    {% if request.user == i.host %}
+
+    <a href="{% url 'editRoom' i.id %}"> Edit room </a> <br>
+    
+    <a href="{% url 'deleteRoom' i.id %}"> Delete room </a>
+
+    {% endif %}
+
+    
+</div>
+
+<hr>
+
+{% endfor %}

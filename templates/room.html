@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+ 
+        {% extends "main.html" %}
+         
+        {% block content %}
+        <style>
+            .room-container{
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                
+
+            }
+        </style>
+
+        <div class="room-container">
+            
+            <div>
+            
+                <h1> {{room.name}}  </h1> 
+
+                <p> {{room.description}} </p>
+
+                <div class="comment-wrapper">
+                    <h3> Conversation </h3>
+                    <hr> 
+
+                    {% for msg in msg%}
+                    <div>
+
+
+                        <small> @{{msg.user}} {{msg.created|timesince}} ago </small>
+
+
+                        <p style="color: green"> {{msg.body}} </p>
+
+                        {% if request.user == msg.user %}
+
+                        <a href="{% url 'deleteMessage' msg.id %}"> Delete </a>
+
+                        {% endif %}
+
+                        <hr>
+
+
+                    </div>
+                </div>
+                    {% endfor %}
+                
+
+
+                    <div>
+                        <h3> Participants </h3>
+                        <hr>
+        
+                        {% for user in participants %}
+                            <div>
+                                <p> @{{user.username}} </p>
+                            </div> 
+        
+                        {% endfor %}
+                    </div>
+
+                {% if request.user.is_authenticated %}
+                <div class="comment-form">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <input type="text" name="body" placeholder="Write your message here... ">
+
+
+                    </form>
+                </div>
+                {% endif %}
+            
+                
+
+            </div>
+
+           
+        </div>
+    
+        {% endblock content %}
+        
+        <script src="" async defer></script>
+    </body>
+</html>

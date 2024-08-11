@@ -1,0 +1,64 @@
+ 
+        {% extends "main.html" %}
+        
+        {% block content %}
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 8px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+
+            .home-container{
+                display: grid;
+                grid-template-columns: 1fr 3fr 1fr;
+
+            }
+        </style>
+        
+
+        <div class ="home-container">
+            <div>
+               {% include 'base/topics.html' %}
+
+            </div>
+
+            <div>
+                {% if request.user == user%}
+                <a href="{% url 'updateUser' %}"> Edit Profile </a>
+        
+                {% endif %}
+
+                <div>
+                    <h5> {{room_count}} rooms available </h5>
+
+                    <a style="color:red; font-size:24px" href="{% url 'addRoom' %}"> Add room </a> <br>
+                    <hr>
+
+                    {% include 'base/feed.html' %}
+
+                
+                </div>
+
+            </div>
+
+            <div>
+                {% include 'base/activity.html' %}
+            </div>
+        
+        </div>
+        
+
+       
+
+        
+
+    
+        {% endblock content %}
+
+        
+   

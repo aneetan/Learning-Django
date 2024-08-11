@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .profile-container{
+        display:grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+
+<div class="profile-container">
+    <div>
+        {% include "base/topics.html" %}
+
+    </div>
+
+    <div>
+        <h1 style="color:red"> Name: {{user.username}} </h1>
+
+        {% if request.user == user%}
+        <a href="{% url 'updateUser' %}"> Edit Profile </a>
+
+        {% endif %}
+ 
+        {% include "base/feed.html" %}
+    </div>
+
+
+    <div>
+        {% include "base/activity.html" %}
+
+    </div>
+
+</div>
+
+
+{% endblock content %}
