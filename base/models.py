@@ -1,5 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+#-----------------user model ----------------------------------
+class User(AbstractUser):
+    name = models.CharField(max_length=100, null = True)
+    email = models.EmailField(unique=True)
+    bio = models.TextField(null=True)
+
+    avatar = models.ImageField(null = True, default="3.jpg")
+    
+    #setting the username field of django as email
+    USERNAME_FIELD = 'email' 
+    REQUIRED_FIELDS= []
+
+
 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
@@ -53,6 +67,9 @@ class Message(models.Model):
         #to return the first 50 characters
         return self.body[0:50]
     
+
+
+
 
     
 
