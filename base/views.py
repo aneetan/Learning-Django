@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from .models import Room, Topic,Message, User
-from .forms import RoomForm, EditUserForm
+from .forms import RoomForm, EditUserForm, UserForm
 
 
 def loginPage(request):
@@ -43,10 +43,10 @@ def loginPage(request):
 def registerUser(request):
     page = 'register'
 
-    form = UserCreationForm()
+    form = UserForm()   
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserForm(request.POST, request.FILES)
         if form.is_valid():
             #commit False to get that user instantly
             user = form.save(commit=False)
@@ -219,7 +219,7 @@ def userProfile(request, pk):
 @login_required(login_url='login')
 def updateUser(request):
     user = request.user
-    form = EditUserForm(instance = user)
+    form = EditUserForm(request.FILES, instance = user)
 
     if request.method == 'POST':
         form = EditUserForm(request.POST, instance=user)
